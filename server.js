@@ -1,14 +1,37 @@
-import{ db} from "./db/connection";
+const express = require("express");
+require("dotenv").config();
+const { connectDB, getDB } = require("./db/connection.js");
 
+const app = express();
 
-// const express = require("express");
-// require("dotenv").config();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-console.log(db)
+const start = async () => {
+    try {
+        await connectDB();
+        const db = getDB();
 
-// const app = express();
+        const add = await db.collection("users").insertOne({
+            name: "Bob",
+            summary: "A charming loft in Paris",
+            bedrooms: 1,
+            bathrooms: 1
+        });
+        console.log(add)
 
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
+        app.listen(process.env.PORT, () => {
+            console.log(
+                `API server running on port http://localhost:${process.env.PORT} !`
+            );
+        });
+    } catch (e) {
+        console.error(e);
+    }
+};
 
-// const PORT = process.env.PORT;
+start();
+
+app.get("/", (req, res) => {
+    console.log(db);
+});

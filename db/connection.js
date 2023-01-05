@@ -1,12 +1,26 @@
 const { MongoClient } = require("mongodb");
 
-const uri = `mongodb://127.0.0.1:27017/`;
-
-const client = new MongoClient(uri, {
+const client = new MongoClient(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
 
-let db = client.db("dating_db");
+const connectDB = async () => {
+    try {
+        await client.connect();
+        console.log("db connected");
+    } catch (e) {
+        console.error(e);
+    }
+};
 
-export { db };
+const getDB = () => {
+    return client.db("dating_DB");
+};
+
+module.exports = {
+    connectDB,
+    getDB,
+};
+
+module.exports = { connectDB, getDB };
