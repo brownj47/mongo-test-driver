@@ -1,0 +1,23 @@
+{
+  "name": "mongo-test-driver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brownj47/mongo-test-driver.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brownj47/mongo-test-driver/issues"
+  },
+  "homepage": "https://github.com/brownj47/mongo-test-driver#readme",
+  "dependencies": {
+    "mongodb": "^4.13.0"
+  }
+}
