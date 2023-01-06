@@ -1,24 +1,18 @@
 const express = require("express");
 require("dotenv").config();
 const { connectDB, getDB } = require("./db/connection.js");
+const apiRoutes = require("./routes");
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/api",apiRoutes);
+
 const start = async () => {
     try {
         await connectDB();
-        const db = getDB();
-
-        const add = await db.collection("users").insertOne({
-            name: "Bob",
-            summary: "A charming loft in Paris",
-            bedrooms: 1,
-            bathrooms: 1
-        });
-        console.log(add)
 
         app.listen(process.env.PORT, () => {
             console.log(
@@ -31,7 +25,3 @@ const start = async () => {
 };
 
 start();
-
-app.get("/", (req, res) => {
-    console.log(db);
-});
